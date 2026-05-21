@@ -1,0 +1,47 @@
+# Model Configuration
+# This file defines available models and their configurations
+
+models:
+  abstractive:
+    - name: facebook/bart-large-cnn
+      type: bart
+      max_length: 1024
+      min_length: 50
+      num_beams: 4
+      early_stopping: true
+      device: cuda
+      
+    - name: google/t5-base
+      type: t5
+      max_length: 512
+      min_length: 50
+      num_beams: 4
+      device: cuda
+      
+    - name: google/pegasus-large
+      type: pegasus
+      max_length: 512
+      min_length: 50
+      num_beams: 4
+      device: cuda
+
+  extractive:
+    - name: bert-base-uncased
+      type: bert
+      max_length: 512
+      num_layers: 12
+      device: cuda
+
+# Model cache configuration
+cache:
+  directory: ./model_cache
+  max_cache_size: 50GB  # Maximum cached model size
+  use_hf_cache: true
+  hf_cache_dir: ~/.cache/huggingface/transformers
+
+# Model loading strategy
+loading:
+  batch_size: 8
+  num_workers: 4
+  pin_memory: true
+  mixed_precision: fp16

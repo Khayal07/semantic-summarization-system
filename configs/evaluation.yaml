@@ -1,0 +1,51 @@
+# Evaluation Configuration
+# Settings for evaluation metrics and assessment
+
+evaluation:
+  # ROUGE metrics
+  rouge:
+    enabled: true
+    metric_types:
+      - rouge1
+      - rouge2
+      - rougeL
+      - rougeLsum
+    use_stemmer: true
+    
+  # BERTScore
+  bertscore:
+    enabled: true
+    model: bert-base-uncased
+    layers: -4
+    use_fast_tokenizer: true
+    
+  # BLEU score
+  bleu:
+    enabled: true
+    max_n_grams: 4
+    smooth_method: exp
+    
+  # Additional metrics
+  additional:
+    length_ratio: true
+    compression_ratio: true
+
+# Evaluation datasets
+datasets:
+  - name: cnn_dailymail
+    version: 3.0.0
+    split: validation
+    max_samples: 1000
+    
+  - name: xsum
+    version: 1.2.0
+    split: validation
+    max_samples: 500
+
+# Evaluation settings
+settings:
+  batch_size: 32
+  num_workers: 4
+  output_dir: ./results
+  save_predictions: true
+  verbose: true

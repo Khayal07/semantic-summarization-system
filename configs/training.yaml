@@ -1,0 +1,51 @@
+# Training Configuration
+# Settings for model training and fine-tuning
+
+training:
+  # Optimization
+  optimizer: adamw
+  learning_rate: 5e-5
+  warmup_steps: 1000
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  adam_epsilon: 1e-8
+  max_grad_norm: 1.0
+  
+  # Training parameters
+  num_epochs: 3
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 16
+  gradient_accumulation_steps: 2
+  logging_steps: 100
+  save_steps: 5000
+  eval_steps: 5000
+  
+  # Scheduler
+  lr_scheduler_type: linear
+  
+  # Data
+  train_dataset: cnn_dailymail
+  eval_dataset: cnn_dailymail
+  test_dataset: cnn_dailymail
+  max_source_length: 512
+  max_target_length: 128
+  
+  # Model
+  model: facebook/bart-base
+  model_type: bart
+  
+  # Output
+  output_dir: ./checkpoints
+  save_total_limit: 3
+  
+  # Hardware
+  fp16: true
+  dataloader_num_workers: 4
+  dataloader_pin_memory: true
+  
+  # Misc
+  seed: 42
+  log_level: info
+  logging_strategy: steps
+  save_strategy: steps
+  eval_strategy: steps
